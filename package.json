@@ -3,7 +3,9 @@
   "description": "My webpack project",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "dev": "webpack-dev-server --inline --hot --no-info --env dev",
+    "prod": "webpack-dev-server --inline --hot --no-info --env prod"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
