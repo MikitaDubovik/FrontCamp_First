@@ -26,5 +26,5 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  */
 
 module.exports =(env) => {
-	return require(`./webpack.${env}.js`)
+	return require(`./webpack.dev.js`)
 }
