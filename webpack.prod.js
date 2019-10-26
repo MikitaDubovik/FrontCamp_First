@@ -1,40 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
-
-/*
- * SplitChunksPlugin is enabled by default and replaced
- * deprecated CommonsChunkPlugin. It automatically identifies modules which
- * should be splitted of chunk by heuristics using module duplication count and
- * module category (i. e. node_modules). And splits the chunks…
- *
- * It is safe to remove "splitChunks" from the generated configuration
- * and was added as an educational example.
- *
- * https://webpack.js.org/plugins/split-chunks-plugin/
- *
- */
+const babelpolyfill = require("@babel/polyfill");
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-/*
- * We've enabled HtmlWebpackPlugin for you! This generates a html
- * page for you when you compile webpack, which will make you start
- * developing and prototyping faster.
- *
- * https://github.com/jantimon/html-webpack-plugin
- *
- */
-
 module.exports = {
 	mode: 'production',
-	entry: './src/index.js',
+	entry: ["@babel/polyfill", './src/scripts/index.js'],
 
 	output: {
 		filename: '[name].[hash].js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
-	plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin()],
+	plugins: [
+		new webpack.ProgressPlugin(),
+		new HtmlWebpackPlugin({
+			template: './src/views/main.html',
+			filename: 'index.html'
+		})],
 
 	module: {
 		rules: [
@@ -57,29 +41,29 @@ module.exports = {
 				}
 			},
 			{
-                "test": /\.styl$/,
-                "use": [
-                    "style-loader",
-                    "css-loader",
-                    "stylus-loader"
-                ]
+				"test": /\.styl$/,
+				"use": [
+					"style-loader",
+					"css-loader",
+					"stylus-loader"
+				]
 			},
 			{
-                "test": /\.less$/,
-                "use": [
-                    "style-loader",
-                    "css-loader",
-                    "less-loader"
-                ]
+				"test": /\.less$/,
+				"use": [
+					"style-loader",
+					"css-loader",
+					"less-loader"
+				]
 			},
 			{
-                "test": /\.scss$/,
-                "use": [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
-            }
+				"test": /\.scss$/,
+				"use": [
+					"style-loader",
+					"css-loader",
+					"sass-loader"
+				]
+			}
 		]
 	},
 
@@ -98,7 +82,6 @@ module.exports = {
 			name: true
 		}
 	},
-
 	devServer: {
 		open: true
 	}

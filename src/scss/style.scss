@@ -1,5 +1,5 @@
 $primary-color: #333;
-$fonts: 'Goudy Old Style';
+$fonts: "Goudy Old Style";
 
 h1 {
   text-align: center;
@@ -7,24 +7,18 @@ h1 {
 }
 
 * {
-  box-sizing: border-box;
   font-family: $fonts;
 }
 
 /* Create two equal columns that floats next to each other */
 .column {
   float: left;
-  width: 50%;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
+  width: 40%;
   font-size: 2em;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.left{
+  margin-left: 10%;
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
@@ -32,4 +26,34 @@ h1 {
   .column {
     width: 100%;
   }
+}
+
+/* List */
+ul {
+  counter-reset: index;
+  padding: 50px;
+}
+
+/* List element */
+li {
+  counter-increment: index;
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  box-sizing: border-box;
+}
+
+/* Element counter */
+li::before {
+  content: counters(index, ".", decimal-leading-zero);
+  text-align: right;
+  font-weight: bold;
+  min-width: 50px;
+  padding-right: 12px;
+  font-variant-numeric: tabular-nums;
+  align-self: flex-start;
+  background-image: linear-gradient(to bottom, aquamarine, orangered);
+  background-attachment: fixed;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
