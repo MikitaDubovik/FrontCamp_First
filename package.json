@@ -5,8 +5,10 @@
     "build": "webpack",
     "start": "webpack-dev-server",
     "dev": "webpack-dev-server --inline --hot --env dev",
-    "prod": "webpack-dev-server --inline --hot --no-info --env prod"
+    "prod": "webpack-dev-server --inline --hot --no-info --env prod",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://mikitadubovik.github.io/FrontCamp_First/",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
@@ -22,6 +24,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.6.0"
+    "@babel/polyfill": "^7.6.0",
+    "gh-pages": "^2.1.1"
   }
 }
