@@ -13,3 +13,5 @@ yarn build
 ```
 
 to bundle your application
+
+permalink: /index.html
