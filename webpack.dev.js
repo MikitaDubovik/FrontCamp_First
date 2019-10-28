@@ -10,7 +10,7 @@ module.exports = {
 	devtool: 'source-map',
 
 	output: {
-		filename: '[name].[hash].js',
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
@@ -40,22 +40,6 @@ module.exports = {
 						]
 					]
 				}
-			},
-			{
-				"test": /\.styl$/,
-				"use": [
-					"style-loader",
-					"css-loader",
-					"stylus-loader"
-				]
-			},
-			{
-				"test": /\.less$/,
-				"use": [
-					"style-loader",
-					"css-loader",
-					"less-loader"
-				]
 			},
 			{
 				"test": /\.scss$/,

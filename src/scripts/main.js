@@ -17,8 +17,7 @@ async function fillInNewsNames() {
 
 async function fetchArticles() {
     let responseData = await getData(`v1/articles?source=${this.id}`);
-    renderArticles(responseData, 'articles');
-    
+    await renderArticles(responseData, 'articles');
 }
 
 fillInNewsNames();
