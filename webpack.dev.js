@@ -26,19 +26,9 @@ module.exports = {
 			{
 				test: /.(js|jsx)$/,
 				include: [path.resolve(__dirname, 'src')],
-				loader: 'babel-loader',
-
-				options: {
-					plugins: ['syntax-dynamic-import'],
-
-					presets: [
-						[
-							'@babel/preset-env',
-							{
-								modules: false
-							}
-						]
-					]
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: 'babel-loader',
 				}
 			},
 			{
