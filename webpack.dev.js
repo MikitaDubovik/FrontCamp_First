@@ -10,7 +10,7 @@ module.exports = {
 	devtool: 'source-map',
 
 	output: {
-		filename: '[name].[hash].js',
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
@@ -26,36 +26,10 @@ module.exports = {
 			{
 				test: /.(js|jsx)$/,
 				include: [path.resolve(__dirname, 'src')],
-				loader: 'babel-loader',
-
-				options: {
-					plugins: ['syntax-dynamic-import'],
-
-					presets: [
-						[
-							'@babel/preset-env',
-							{
-								modules: false
-							}
-						]
-					]
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: 'babel-loader',
 				}
-			},
-			{
-				"test": /\.styl$/,
-				"use": [
-					"style-loader",
-					"css-loader",
-					"stylus-loader"
-				]
-			},
-			{
-				"test": /\.less$/,
-				"use": [
-					"style-loader",
-					"css-loader",
-					"less-loader"
-				]
 			},
 			{
 				"test": /\.scss$/,
