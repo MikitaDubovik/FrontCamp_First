@@ -12,6 +12,14 @@ export async function renderArticles(responseData, tag) {
 
 async function createLi(element, list) {
     let item = document.createElement('li');
+    let table = addTable(element);
+
+    item.appendChild(table);
+
+    list.appendChild(item);
+}
+
+function addTable(element) {
     let table = document.createElement('table');
     let firstRow = document.createElement('tr');
     let tableImage = addImage(element);
@@ -20,20 +28,21 @@ async function createLi(element, list) {
     addLink(tableLink, element);
 
     firstRow.appendChild(tableImage);
-    firstRow.appendChild(tableLink);
 
     table.appendChild(firstRow);
 
     let secondRow = document.createElement('tr');
-    let tableDesc = addDescription(element);
-
-    secondRow.appendChild(tableDesc);
+    secondRow.appendChild(tableLink);
 
     table.appendChild(secondRow);
 
-    item.appendChild(table);
+    let thirdRow = document.createElement('tr');
+    let tableDesc = addDescription(element);
+    thirdRow.appendChild(tableDesc);
 
-    list.appendChild(item);
+    table.appendChild(thirdRow);
+
+    return table;
 }
 
 function addDescription(element) {
@@ -52,7 +61,6 @@ function addImage(element) {
     image.src = element.urlToImage;
 
     tableImage.appendChild(image);
-    tableImage.className = "table-image";
 
     return tableImage;
 }
