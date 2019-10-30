@@ -11,7 +11,7 @@ export class NewsHeadresList {
     }
 
     async renderHeaders() {
-        const responseData = await this.#httpService.getData("v2/sources?country=gb");
+        const responseData = await this.#httpService.getArticles("v2/sources?country=gb");
 
         let list = document.getElementById('newsnames');
 
@@ -26,7 +26,7 @@ export class NewsHeadresList {
 
     //TODO: Не знаю как в EventListener пропихнуть приватное поле
     async fetchArticles() {
-        const responseData = await new HttpService().getData(`v1/articles?source=${this.id}`);
+        const responseData = await new HttpService().getArticles(`v1/articles?source=${this.id}`);
         await new NewsArticlesList().renderArticles(responseData, 'articles');
     }
 }
