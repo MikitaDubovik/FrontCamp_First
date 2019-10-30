@@ -20,7 +20,7 @@ export class NewsSourcesList {
         responseData.sources.forEach(element => {
             let item = document.createElement('li');
             item.id = element.id;
-            item.addEventListener("click", this.fetchArticles.bind(this));
+            item.addEventListener("click", (event)=>this.fetchArticles(event));
             item.appendChild(document.createTextNode(element.name));
             list.appendChild(item);
         });
