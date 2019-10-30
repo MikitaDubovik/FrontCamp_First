@@ -2,7 +2,7 @@
 import { NewsHeadresList } from './news-headres-list';
 
 export class App {
-    async loadNews() {
+    async start() {
         await new NewsHeadresList().renderHeaders();
     }
 }
