@@ -1,78 +1,79 @@
-export async function renderArticles(responseData, tag) {
-    let list = document.getElementById(tag);
+export class Render {
 
-    if (list.firstChild) {
-        list.innerHTML = '';
+    async renderArticles(responseData, tag) {
+        let list = document.getElementById(tag);
+
+        if (list.firstChild) {
+            list.innerHTML = '';
+        }
+
+        await responseData.articles.forEach(async (element) => {
+            await this.createLi(element, list);
+        });
     }
 
-    await responseData.articles.forEach(async (element) => {
-        await createLi(element, list);
-    });
-}
+    async createLi(element, list) {
+        let item = document.createElement('li');
+        let table = this.addTable(element);
 
-async function createLi(element, list) {
-    let item = document.createElement('li');
-    let table = addTable(element);
+        item.appendChild(table);
 
-    item.appendChild(table);
+        list.appendChild(item);
+    }
 
-    list.appendChild(item);
-}
+    addTable(element) {
+        let table = document.createElement('table');
+        let firstRow = document.createElement('tr');
+        let tableImage = this.addImage(element);
+        let tableLink = this.addLink(element);
 
-function addTable(element) {
-    let table = document.createElement('table');
-    let firstRow = document.createElement('tr');
-    let tableImage = addImage(element);
-    let tableLink = addLink(element);
+        firstRow.appendChild(tableImage);
 
-    addLink(tableLink, element);
+        table.appendChild(firstRow);
 
-    firstRow.appendChild(tableImage);
+        let secondRow = document.createElement('tr');
+        secondRow.appendChild(tableLink);
 
-    table.appendChild(firstRow);
+        table.appendChild(secondRow);
 
-    let secondRow = document.createElement('tr');
-    secondRow.appendChild(tableLink);
+        let thirdRow = document.createElement('tr');
+        let tableDesc = this.addDescription(element);
+        thirdRow.appendChild(tableDesc);
 
-    table.appendChild(secondRow);
+        table.appendChild(thirdRow);
 
-    let thirdRow = document.createElement('tr');
-    let tableDesc = addDescription(element);
-    thirdRow.appendChild(tableDesc);
+        return table;
+    }
 
-    table.appendChild(thirdRow);
+    addDescription(element) {
+        let tableDesc = document.createElement('td');
 
-    return table;
-}
+        let desc = document.createElement('p');
+        desc.innerText = element.description;
+        tableDesc.appendChild(desc);
 
-function addDescription(element) {
-    let tableDesc = document.createElement('td');
+        return tableDesc;
+    }
 
-    let desc = document.createElement('p');
-    desc.innerText = element.description;
-    tableDesc.appendChild(desc);
+    addImage(element) {
+        let tableImage = document.createElement('td');
+        let image = new Image();
+        image.src = element.urlToImage;
 
-    return tableDesc;
-}
+        tableImage.appendChild(image);
 
-function addImage(element) {
-    let tableImage = document.createElement('td');
-    let image = new Image();
-    image.src = element.urlToImage;
+        return tableImage;
+    }
 
-    tableImage.appendChild(image);
+    addLink(element) {
+        let tableLink = document.createElement('td');
+        let aElement = document.createElement('a');
 
-    return tableImage;
-}
+        aElement.href = element.url;
+        aElement.appendChild(document.createTextNode(element.title));
 
-function addLink(element) {
-    let tableLink = document.createElement('td');
-    var aElement = document.createElement('a');
+        tableLink.appendChild(aElement);
 
-    aElement.href = element.url;
-    aElement.appendChild(document.createTextNode(element.title));
-
-    tableLink.appendChild(aElement);
-
-    return tableLink;
+        return tableLink;
+    }
 }

@@ -1,2 +1,4 @@
 import '../scss/style.scss';
-import './main.js';
+import { News } from './news.js';
+
+new News().fillInNewsNames();
