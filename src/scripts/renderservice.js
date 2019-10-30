@@ -8,7 +8,7 @@ export class Render {
         }
 
         await responseData.articles.forEach(async (element) => {
-            await this.createLi(element, list);
+            this.createLi(element, list);
         });
     }
 
