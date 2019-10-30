@@ -9,7 +9,7 @@ export class News {
         this.#render = new Receive();
     }
     async  fillInNewsNames() {
-        let responseData = await this.#render.getData("v2/sources?country=gb");
+        const responseData = await this.#render.getData("v2/sources?country=gb");
         
         let list = document.getElementById('newsnames');
     
@@ -24,7 +24,7 @@ export class News {
     
     //TODO: Не знаю как в EventListener пропихнуть приватное поле
     async fetchArticles() {
-        let responseData = await new Receive().getData(`v1/articles?source=${this.id}`);
+        const responseData = await new Receive().getData(`v1/articles?source=${this.id}`);
         await new Render().renderArticles(responseData, 'articles');
     }
 }

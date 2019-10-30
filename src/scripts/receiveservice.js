@@ -4,9 +4,9 @@ export class Receive {
     #baseUrl = 'https://newsapi.org/';
 
     async getData(arg) {
-        let response = await fetch(`${this.#baseUrl}${arg}${this.#apiKey}`);
+        const response = await fetch(`${this.#baseUrl}${arg}${this.#apiKey}`);
         if (response.ok) {
-            let responseData = await response.json();
+            const responseData = await response.json();
 
             return responseData;
         }
