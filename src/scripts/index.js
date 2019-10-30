@@ -1,4 +1,4 @@
 import '../scss/style.scss';
-import { News } from './news.js';
+import { App } from './app.js';
 
-new News().fillInNewsNames();
+new App().loadNews();

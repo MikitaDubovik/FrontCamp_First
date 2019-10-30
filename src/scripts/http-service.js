@@ -1,4 +1,4 @@
-export class Receive {
+export class HttpService {
     #privateField;
     #apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
     #baseUrl = 'https://newsapi.org/';

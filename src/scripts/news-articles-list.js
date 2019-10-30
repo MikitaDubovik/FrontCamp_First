@@ -1,4 +1,4 @@
-export class Render {
+export class NewsArticlesList {
 
     async renderArticles(responseData, tag) {
         let list = document.getElementById(tag);

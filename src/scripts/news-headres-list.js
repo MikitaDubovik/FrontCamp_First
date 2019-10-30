@@ -1,18 +1,20 @@
-import { Receive } from './receiveservice';
-import { Render } from './renderservice'
 
-export class News {
+import { HttpService } from './http-service';
+import { NewsArticlesList } from './news-articles-list'
 
-    #render;
+export class NewsHeadresList {
 
-    constructor(){
-        this.#render = new Receive();
+    #httpService;
+
+    constructor() {
+        this.#httpService = new HttpService();
     }
-    async  fillInNewsNames() {
-        const responseData = await this.#render.getData("v2/sources?country=gb");
-        
+
+    async renderHeaders() {
+        const responseData = await this.#httpService.getData("v2/sources?country=gb");
+
         let list = document.getElementById('newsnames');
-    
+
         responseData.sources.forEach(element => {
             let item = document.createElement('li');
             item.id = element.id;
@@ -21,10 +23,10 @@ export class News {
             list.appendChild(item);
         });
     }
-    
+
     //TODO: Не знаю как в EventListener пропихнуть приватное поле
     async fetchArticles() {
-        const responseData = await new Receive().getData(`v1/articles?source=${this.id}`);
-        await new Render().renderArticles(responseData, 'articles');
+        const responseData = await new HttpService().getData(`v1/articles?source=${this.id}`);
+        await new NewsArticlesList().renderArticles(responseData, 'articles');
     }
 }
