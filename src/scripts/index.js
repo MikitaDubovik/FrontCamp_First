@@ -1,2 +1,4 @@
 import '../scss/style.scss';
-import './main.js';
+import { App } from './app.js';
+
+new App().start();

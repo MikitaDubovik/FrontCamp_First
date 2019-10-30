@@ -11,7 +11,7 @@ module.exports = {
 	entry: ["@babel/polyfill", './src/scripts/index.js'],
 
 	output: {
-		filename: '[name].bundle.js',
+		filename: '[name].[hash].js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
@@ -19,7 +19,7 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new webpack.ProgressPlugin(),
 		new HtmlWebpackPlugin({
-			template: './src/views/main.html',
+			template: './src/views/news.html',
 			filename: 'index.html'
 		})],
 

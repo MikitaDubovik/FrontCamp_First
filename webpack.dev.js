@@ -10,14 +10,14 @@ module.exports = {
 	devtool: 'source-map',
 
 	output: {
-		filename: '[name].bundle.js',
+		filename: '[name].[hash].js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
 	plugins: [
 		new webpack.ProgressPlugin(),
 		new HtmlWebpackPlugin({
-			template: './src/views/main.html',
+			template: './src/views/news.html',
 			filename: 'index.html'
 		})],
 
