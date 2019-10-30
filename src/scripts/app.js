@@ -1,8 +1,8 @@
 
-import { NewsHeadresList } from './news-headres-list';
+import { NewsSourcesList } from './news-sources-list';
 
 export class App {
     async start() {
-        await new NewsHeadresList().renderHeaders();
+        await new NewsSourcesList().renderHeaders();
     }
 }

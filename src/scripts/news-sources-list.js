@@ -2,7 +2,7 @@
 import { HttpService } from './http-service';
 import { NewsArticlesList } from './news-articles-list'
 
-export class NewsHeadresList {
+export class NewsSourcesList {
 
     #httpService;
 
