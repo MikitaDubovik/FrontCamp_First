@@ -1,10 +1,10 @@
 export class HttpService {
-    #privateField;
-    #apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
-    #baseUrl = 'https://newsapi.org/';
+    privateField;
+    apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
+    baseUrl = 'https://newsapi.org/';
 
     async getNewsData(arg) {
-        const response = await fetch(`${this.#baseUrl}${arg}${this.#apiKey}`);
+        const response = await fetch(`${this.baseUrl}${arg}${this.apiKey}`);
         if (response.ok) {
             const responseData = await response.json();
 
