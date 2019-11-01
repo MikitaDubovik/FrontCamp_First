@@ -1,5 +1,5 @@
 
-import { HttpService } from '../http-service/http-service';
+import { HttpServiceFactory } from '../http-service/http-service-factory';
 import { NewsArticlesList } from './news-articles-list'
 
 export class NewsSourcesList {
@@ -8,12 +8,12 @@ export class NewsSourcesList {
     newsArticlesList
 
     constructor() {
-        this.httpService = new HttpService();
+        this.httpService = new HttpServiceFactory();
         this.newsArticlesList = new NewsArticlesList();
     }
 
     async renderHeaders() {
-        const responseData = await this.httpService.getNewsData("v2/sources?country=gb");
+        const responseData = await this.httpService.doRequest("v2/sources?country=gb", "GET");
 
         let list = document.getElementById('newsnames');
 
@@ -27,7 +27,7 @@ export class NewsSourcesList {
     }
 
     async fetchArticles(event) {
-        const responseData = await this.httpService.getNewsData(`v1/articles?source=${event.srcElement.id}`);
+        const responseData = await this.httpService.doRequest(`v1/articles?source=${event.srcElement.id}`, "GET");
         await this.newsArticlesList.renderArticles(responseData, 'articles');
     }
 }
