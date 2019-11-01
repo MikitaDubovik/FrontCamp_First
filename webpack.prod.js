@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
-	entry: ["@babel/polyfill", './src/scripts/index.js'],
+	entry: ["@babel/polyfill", './src/scripts/index/index.js'],
 
 	output: {
 		filename: '[name].[hash].js',

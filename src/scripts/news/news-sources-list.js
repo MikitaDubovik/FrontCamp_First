@@ -1,19 +1,19 @@
 
-import { HttpService } from './http-service';
+import { HttpService } from '../http-service/http-service';
 import { NewsArticlesList } from './news-articles-list'
 
 export class NewsSourcesList {
 
-    #httpService;
-    #newsArticlesList
+    httpService;
+    newsArticlesList
 
     constructor() {
-        this.#httpService = new HttpService();
-        this.#newsArticlesList = new NewsArticlesList();
+        this.httpService = new HttpService();
+        this.newsArticlesList = new NewsArticlesList();
     }
 
     async renderHeaders() {
-        const responseData = await this.#httpService.getNewsData("v2/sources?country=gb");
+        const responseData = await this.httpService.getNewsData("v2/sources?country=gb");
 
         let list = document.getElementById('newsnames');
 
@@ -27,7 +27,7 @@ export class NewsSourcesList {
     }
 
     async fetchArticles(event) {
-        const responseData = await this.#httpService.getNewsData(`v1/articles?source=${event.srcElement.id}`);
-        await this.#newsArticlesList.renderArticles(responseData, 'articles');
+        const responseData = await this.httpService.getNewsData(`v1/articles?source=${event.srcElement.id}`);
+        await this.newsArticlesList.renderArticles(responseData, 'articles');
     }
 }

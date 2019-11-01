@@ -1,5 +1,6 @@
 
-import { NewsSourcesList } from './news-sources-list';
+
+import { NewsSourcesList } from '../news/news-sources-list';
 
 export class App {
     async start() {
