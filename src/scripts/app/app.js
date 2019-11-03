@@ -1,5 +1,3 @@
-
-
 import { NewsSourcesList } from '../news/news-sources-list';
 import instance from '../errors-handler/errors-handler';
 

@@ -1,63 +1,42 @@
 import { HttpService } from "./http-service"
 
 export class HttpServiceFactory {
-    apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
-    baseUrl = 'https://newsapi.org/';
+    httpService;
 
-    async doRequest(url, type, body) {
+    constructor() {
+        this.httpService = new HttpService();
+    }
+
+    async doRequest(url, type, options) {
         let response;
         switch (type) {
             case "GET":
-                response = await this.get(url);
+                response = await this.get(url, options);
                 break;
             case "POST":
-                response = await this.post(url, body);
+                response = await this.post(url, options);
                 break;
             case "PUT":
-                response = await this.put(url, body)
+                response = await this.put(url, options)
                 break;
+            default:
+                throw new Error(`Can't interact with method ${type}`);
         }
 
         return response
     }
 
-    async get(url) {
-        const response = await fetch(`${this.baseUrl}${url}${this.apiKey}`);
-
-        return await this.getData(response);
+    async get(url, options) {
+        return await this.httpService.doRequest(url, options);
     }
 
-    async post(url, body) {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        })
-
-        return await this.getData(response);
+    async post(url, options) {
+        options.method = 'POST';
+        return await this.httpService.doRequest(url, options);
     }
 
-    async put(url, body) {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        })
-
-        return await this.getData(response);
-    }
-
-    async getData(response) {
-        if (response.ok) {
-            const responseData = await response.json();
-
-            return responseData;
-        }
-
-        return null;
+    async put(url, options) {
+        options.method = 'PUT';
+        return await this.httpService.doRequest(url, options);
     }
 }
