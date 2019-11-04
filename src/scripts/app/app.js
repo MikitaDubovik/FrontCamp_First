@@ -1,4 +1,5 @@
 import { NewsSourcesList } from '../news/news-sources-list';
+import { LazyLoadingService } from '../lazy-loading/lazy-loading-service';
 
 export class App {
     async start() {
@@ -6,7 +7,7 @@ export class App {
             await new NewsSourcesList().renderHeaders();
         }
         catch (err) {
-            let errorsHandler = await import(/* webpackChunkName: 'errors-handler' */ '../errors-handler/errors-handler.js').then(({ default: ErrorsHandler }) => { return new ErrorsHandler() });
+            let errorsHandler = await new LazyLoadingService().load('ErrorsHandler');
             errorsHandler.handle(err);
         }
     }
