@@ -1,6 +1,4 @@
 import { NewsSourcesList } from '../news/news-sources-list';
-import { ErrorsHandler } from '../errors-handler/errors-handler';
-
 
 export class App {
     async start() {
@@ -8,7 +6,8 @@ export class App {
             await new NewsSourcesList().renderHeaders();
         }
         catch (err) {
-            new ErrorsHandler().handle(err);
+            let errorsHandler = await import(/* webpackChunkName: 'errors-handler' */ '../errors-handler/errors-handler.js').then(({ default: ErrorsHandler }) => { return new ErrorsHandler() });
+            errorsHandler.handle(err);
         }
     }
 }

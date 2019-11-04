@@ -1,6 +1,6 @@
 import { Modal } from "./Modal.js"
 
-export class ErrorsHandler {
+export default class ErrorsHandler {
     modal;
     constructor() {
         if (typeof ErrorsHandler.instance === 'object') {
