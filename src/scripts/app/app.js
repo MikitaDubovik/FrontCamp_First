@@ -1,5 +1,5 @@
 import { NewsSourcesList } from '../news/news-sources-list';
-import instance from '../errors-handler/errors-handler';
+import { ErrorsHandler } from '../errors-handler/errors-handler';
 
 
 export class App {
@@ -8,7 +8,7 @@ export class App {
             await new NewsSourcesList().renderHeaders();
         }
         catch (err) {
-            instance.handle(err);
+            new ErrorsHandler().handle(err);
         }
     }
 }
