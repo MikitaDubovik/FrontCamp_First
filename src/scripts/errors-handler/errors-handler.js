@@ -15,10 +15,6 @@ export default class ErrorsHandler {
     }
 
     handle(err) {
-        if (!ErrorsHandler.instance) {
-            ErrorsHandler.instance = this;
-        }
-
         this.modal.updateErrorMessage(err);
         this.modal.showModal();
     }
