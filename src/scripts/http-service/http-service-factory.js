@@ -8,7 +8,6 @@ export class httpRequestFactory {
     }
 
     doRequest(url, type, options) {
-        options ? options.type = type : options = { type: type };
         switch (type) {
             case "GET":
                 return new HttpRequest(url, options);

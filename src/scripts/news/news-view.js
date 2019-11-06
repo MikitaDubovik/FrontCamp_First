@@ -1,7 +1,10 @@
 export class NewsView {
-    constructor(sourcesData) {
+    constructor(sourcesData, model) {
         this.newsnames = document.getElementById('newsnames');
         this.articles = document.getElementById('articles');
+        this.model = model;
+
+        this.model.subscribe(this.displayArticles.bind(this));
 
         this.fillSourcesList(sourcesData);
     }
@@ -25,6 +28,16 @@ export class NewsView {
             this.createLi(element);
         });
 
+    }
+    
+    bindClickSource(handler) {
+        this.newsnames.childNodes.forEach(element => {
+            //Take existing items and add eventListner
+            element.addEventListener('click', event => {
+                event.preventDefault();
+                handler(element)
+            });
+        });
     }
 
     createLi(element) {
@@ -90,15 +103,5 @@ export class NewsView {
         tableLink.appendChild(aElement);
 
         return tableLink;
-    }
-
-    bindClickSource(handler) {
-        this.newsnames.childNodes.forEach(element => {
-            //Take existing items and add eventListner
-            element.addEventListener('click', event => {
-                event.preventDefault();
-                handler(element)
-            });
-        });
     }
 }

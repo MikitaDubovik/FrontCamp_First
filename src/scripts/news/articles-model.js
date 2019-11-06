@@ -1,6 +1,7 @@
 export class ArticlesModel {
     constructor() {
         this.articles = [];
+        this.observers = [];
     }
 
     setArticle(data) {
@@ -12,10 +13,18 @@ export class ArticlesModel {
             title: element.title
         }));
 
-        this.onSourceListClick(this.articles);
+        this.observers.forEach(observer => observer(this.articles));
     }
 
     bindSourceListClick(callback) {
         this.onSourceListClick = callback
+    }
+
+    subscribe(callback) {
+        this.observers.push(callback);
+    }
+
+    unsubscribe(callback) {
+        this.observers = this.observers.filter(subscriber => subscriber !== callback);
     }
 }

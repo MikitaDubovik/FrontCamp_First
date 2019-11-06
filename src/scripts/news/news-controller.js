@@ -6,9 +6,7 @@ export class NewsController {
         this.model = model;
         this.view = view;
 
-        this.loggerProxy = new LoggerProxy(new HttpClient())
-
-        this.model.bindSourceListClick(this.onSourceListClick);
+        this.loggerProxy = new LoggerProxy(new HttpClient());
 
         this.view.bindClickSource(this.hanldeClick);
 
@@ -23,11 +21,5 @@ export class NewsController {
         //Load articles from service
         const responseData = await this.loggerProxy.get(`v1/articles?source=${element.id}`);
         this.model.setArticle(responseData);
-    }
-
-    async fillSourcesList() {
-        const responseData = await this.loggerProxy.get("v2/sources?country=gb");
-
-        this.view.fillSourcesList(responseData);
     }
 }
