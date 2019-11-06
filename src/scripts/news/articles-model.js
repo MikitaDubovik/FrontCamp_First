@@ -3,17 +3,14 @@ export class ArticlesModel {
         this.articles = [];
     }
 
-    addArticle(data) {
+    setArticle(data) {
         this.articles = [];
-        data.articles.forEach(element => {
-            let article = {
-                src: element.urlToImage,
-                description: element.description,
-                title: element.title
-            }
 
-            this.articles.push(article);
-        });
+        this.articles = data.articles.map(element => ({
+            src: element.urlToImage,
+            description: element.description,
+            title: element.title
+        }));
 
         this.onSourceListClick(this.articles);
     }

@@ -1,23 +1,34 @@
-import { HttpServiceFactory } from './http-service-factory.js';
+import { httpRequestFactory } from './http-service-factory.js';
 
 //Body of POST/PUT request in options of fetch
 //headers = { 'Content-Type': 'application/json' } for them
 export class HttpClient {
-    httpServiceFactory;
-
-    constructor(){
-        this.httpServiceFactory = new HttpServiceFactory();
+    constructor() {
+        this.httpRequestFactory = new httpRequestFactory();
     }
 
-    get(url, options) {
-        return this.httpServiceFactory.doRequest(url, 'GET', options);
+    async get(url, options) {
+        return await this.doRequest(url, 'GET', options);
     }
 
-    post(url, options) {
-        return this.httpServiceFactory.doRequest(url, 'POST', options);
+    async post(url, options) {
+        return await this.doRequest(url, 'POST', options);
     }
 
-    put(url, options) {
-        return this.httpServiceFactory.doRequest(url, 'PUT', options);
+    async put(url, options) {
+        return await this.doRequest(url, 'PUT', options);
+    }
+
+    async doRequest(url, method, options) {
+        const httpRequest = this.httpRequestFactory.doRequest(url, method, options);
+        const response = await fetch(httpRequest.url, { ...httpRequest.options });
+
+        if (response.ok) {
+            const responseData = await response.json();
+
+            return responseData;
+        }
+
+        return null;
     }
 }

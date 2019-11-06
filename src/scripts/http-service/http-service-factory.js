@@ -1,42 +1,25 @@
-import { HttpService } from "./http-service"
+import { HttpRequest } from "./http-request"
 
-export class HttpServiceFactory {
-    httpService;
+export class httpRequestFactory {
+    httpRequest;
 
     constructor() {
-        this.httpService = new HttpService();
+        this.httpRequest = new HttpRequest();
     }
 
-    async doRequest(url, type, options) {
-        let response;
+    doRequest(url, type, options) {
+        options ? options.type = type : options = { type: type };
         switch (type) {
             case "GET":
-                response = await this.get(url, options);
-                break;
+                return new HttpRequest(url, options);
             case "POST":
-                response = await this.post(url, options);
-                break;
+                options ? options.type = type : options = { type: type };
+                return new HttpRequest(url, options);
             case "PUT":
-                response = await this.put(url, options)
-                break;
+                options ? options.type = type : options = { type: type };
+                return new HttpRequest(url, options);
             default:
                 throw new Error(`Can't interact with method ${type}`);
         }
-
-        return response
-    }
-
-    async get(url, options) {
-        return await this.httpService.doRequest(url, options);
-    }
-
-    async post(url, options) {
-        options.method = 'POST';
-        return await this.httpService.doRequest(url, options);
-    }
-
-    async put(url, options) {
-        options.method = 'PUT';
-        return await this.httpService.doRequest(url, options);
     }
 }

@@ -3,6 +3,7 @@
   "description": "My webpack project",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
+    "build-dev": "webpack --config webpack.dev.js",
     "start": "webpack-dev-server --config webpack.dev.js",
     "dev": "webpack-dev-server --inline --hot --env dev",
     "prod": "webpack-dev-server --inline --hot --no-info --env prod",

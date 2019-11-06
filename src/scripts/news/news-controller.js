@@ -22,7 +22,7 @@ export class NewsController {
     hanldeClick = async (element) => {
         //Load articles from service
         const responseData = await this.loggerProxy.get(`v1/articles?source=${element.id}`);
-        this.model.addArticle(responseData);
+        this.model.setArticle(responseData);
     }
 
     async fillSourcesList() {
