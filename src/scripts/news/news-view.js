@@ -1,24 +1,52 @@
-export class NewsArticlesList {
+export class NewsView {
+    constructor(sourcesData, model) {
+        this.newsnames = document.getElementById('newsnames');
+        this.articles = document.getElementById('articles');
+        this.model = model;
 
-    async renderArticles(responseData, tag) {
-        let list = document.getElementById(tag);
+        this.model.subscribe(this.displayArticles.bind(this));
 
-        if (list.firstChild) {
-            list.innerHTML = '';
-        }
+        this.fillSourcesList(sourcesData);
+    }
 
-        await responseData.articles.forEach(async (element) => {
-            this.createLi(element, list);
+    //Create left panel - news sources
+    fillSourcesList(responseData) {
+        responseData.sources.forEach(element => {
+            let item = document.createElement('li');
+            item.id = element.id;
+            item.appendChild(document.createTextNode(element.name));
+            this.newsnames.appendChild(item);
         });
     }
 
-    async createLi(element, list) {
+    displayArticles(articles) {
+        while (this.articles.firstChild) {
+            this.articles.removeChild(this.articles.firstChild)
+          }
+
+        articles.forEach(element => {
+            this.createLi(element);
+        });
+
+    }
+    
+    bindClickSource(handler) {
+        this.newsnames.childNodes.forEach(element => {
+            //Take existing items and add eventListner
+            element.addEventListener('click', event => {
+                event.preventDefault();
+                handler(element)
+            });
+        });
+    }
+
+    createLi(element) {
         let item = document.createElement('li');
         let table = this.addTable(element);
 
         item.appendChild(table);
 
-        list.appendChild(item);
+        this.articles.appendChild(item);
     }
 
     addTable(element) {
@@ -58,7 +86,7 @@ export class NewsArticlesList {
     addImage(element) {
         let tableImage = document.createElement('td');
         let image = new Image();
-        image.src = element.urlToImage;
+        image.src = element.src;
 
         tableImage.appendChild(image);
 
